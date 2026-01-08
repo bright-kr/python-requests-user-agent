@@ -1,8 +1,8 @@
 # Setting and Changing User Agent with Python Requests
 
-[![Bright Data Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.com/)
+[![Bright Data Promo](https://github.com/luminati-io/LinkedIn-Scraper/raw/main/Proxies%20and%20scrapers%20GitHub%20bonus%20banner.png)](https://brightdata.co.kr/)
 
-This guide explains how to set and rotate the User-Agent header in Python Requests for safe and successful web scraping:
+이 가이드는 안전하고 성공적인 Webスクレイピング을 위해 Python Requests에서 User-Agent ヘッダー를 설정하고 로ーテ이션하는 방법을 설명합니다:
 
 - [Why You Should Always Set the User Agent Header](#why-you-should-always-set-the-user-agent-header)
 - [What Is the Default Requests Python User Agent?](#what-is-the-default-requests-python-user-agent)
@@ -11,32 +11,32 @@ This guide explains how to set and rotate the User-Agent header in Python Reques
 
 ## Why You Should Always Set the User Agent Header
 
-The User-Agent HTTP header identifies the client software making the request. It typically includes details about the browser type, operating system, and architecture.
+User-Agent HTTP ヘッダー는 리クエスト를 수행하는 클라이언트 소프트웨어를 식별합니다. 일반적으로 브라우저 유형, 운영 체제, 아키텍처에 대한 세부 정보를 포함합니다.
 
-Here's an example of a Chrome user agent:
+다음은 Chrome user agent의 예시입니다:
 
 ```
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36
 ```
 
-This string contains:
+이 문자열에는 다음이 포함됩니다:
 
-* `Mozilla/5.0`: A historical prefix indicating Mozilla compatibility
-* `Windows NT 10.0; Win64; x64`: Operating system, platform, and architecture
-* `AppleWebKit/537.36`: Browser engine
-* `KHTML, like Gecko`: Compatibility indicators
-* `Chrome/125.0.0.0`: Browser name and version
-* `Safari/537.36`: Safari compatibility
+* `Mozilla/5.0`: Mozilla 호환성을 나타내는 역사적 접두사입니다
+* `Windows NT 10.0; Win64; x64`: 운영 체제, 플랫폼, 아키텍처입니다
+* `AppleWebKit/537.36`: 브라우저 엔진입니다
+* `KHTML, like Gecko`: 호환성 표시입니다
+* `Chrome/125.0.0.0`: 브라우저 이름과 버전입니다
+* `Safari/537.36`: Safari 호환성입니다
 
-The user agent helps websites determine whether a request comes from a legitimate browser or potentially automated software. Anti-scraping systems often look at this header to identify and block bots, which typically use default or inconsistent user agent strings.
+user agent는 웹사이트가 리クエスト가 정상적인 브라우저에서 오는지, 혹은 자동화된 소프트웨어에서 오는지 판단하는 데 도움이 됩니다. スクレイピング 방지 시스템은 종종 이 ヘッダー를 확인하여 봇을 식별하고 차단하는데, 봇은 일반적으로 기본값이거나 일관되지 않은 user agent 문자열을 사용합니다.
 
 ## What Is the Default Requests Python User Agent?
 
-The Python Requests library sets a default User-Agent header in the format:
+Python Requests 라이브러리는 다음 형식으로 기본 User-Agent ヘッダー를 설정합니다:
 
 `python-requests/X.Y.Z`
 
-Where X.Y.Z is your installed Requests version. You can verify this by making a test request:
+여기서 X.Y.Z는 설치된 Requests 버전입니다. 테스트 리クエ스트를 수행하여 이를 확인할 수 있습니다:
 
 ```python
 import requests
@@ -48,19 +48,19 @@ response = requests.get('https://httpbin.io/user-agent')
 print(response.json())
 ```
 
-The output will look like:
+출력은 다음과 같이 표시됩니다:
 
 ```
 {'user-agent': 'python-requests/2.32.3'}
 ```
 
-This clearly identifies your request as coming from an automated tool rather than a browser, making it easy for websites to detect and block your scraping attempts.
+이는 브라우저가 아니라 자동화 도구에서 오는 리クエ스트임을 명확히 식별하므로, 웹사이트가 スクレイピング 시도를 감지하고 차단하기가 쉬워집니다.
 
 ## How to Change the Python Requests User Agent
 
 ### Set a Custom User Agent
 
-Customize the User-Agent by passing it in the headers dictionary:
+headers 딕셔너리에 전달하여 User-Agent를 사용자 정의합니다:
 
 ```python
 import requests
@@ -84,7 +84,7 @@ response = requests.get('https://httpbin.io/user-agent', headers=headers)
 print(response.json())
 ```
 
-To set a user agent for all requests in a session:
+セッション 내 모든 리クエ스트에 대해 user agent를 설정하려면 다음을 사용합니다:
 
 ```python
 import requests
@@ -108,11 +108,11 @@ print(response.json())
 # other requests with a custom user agent within the session ...
 ```
 
-This will produce the same output as before.
+이는 이전과 동일한 출력을 생성합니다.
 
 ### Unset the User Agent
 
-Although not recommended, you might occasionally need to remove the User-Agent header. Setting it to `None` won't work as expected:
+권장되지는 않지만, 때때로 User-Agent ヘッダー를 제거해야 할 수도 있습니다. 이를 `None`으로 설정해도 기대한 대로 동작하지 않습니다:
 
 ```python
 import requests
@@ -136,13 +136,13 @@ response = requests.get('https://httpbin.io/user-agent', headers=headers)
 print(response.json())
 ```
 
-This approach still results in the urllib3 default user agent:
+이 방식은 여전히 urllib3 기본 user agent를 반환합니다:
 
 ```
 {'user-agent': 'python-urllib3/2.2.1'}
 ```
 
-To completely remove the header, use `urllib3.util.SKIP_HEADER`:
+ヘッダー를 완전히 제거하려면 `urllib3.util.SKIP_HEADER`를 사용합니다:
 
 ```python
 import requests
@@ -180,7 +180,7 @@ response = session.send(prepared_request)
 print(response.json())
 ```
 
-Run the above Python code, and you will receive:
+위 Python 코드를 실행하면 다음을 받게 됩니다:
 
 ```
 {'headers': {'Accept-Encoding': ['identity'], 'Host': ['httpbin.io']}}
@@ -188,9 +188,9 @@ Run the above Python code, and you will receive:
 
 ## Implement User Agent Rotation in Requests
 
-Using a single user agent for multiple requests can still trigger anti-bot systems. User agent rotation makes your requests appear to come from different browsers.
+여러 리クエ스트에 단일 user agent를 사용하면 アンチボット 시스템이 여전히 트리거될 수 있습니다. user agent 로ーテ이션은 리クエ스트가 서로 다른 브라우저에서 오는 것처럼 보이게 합니다.
 
-Here's how to implement it:
+구현 방법은 다음과 같습니다:
 
 ### Step 1: Create a User Agent List
 
@@ -210,13 +210,13 @@ user_agents = [
 
 ### Step 2: Select a Random User Agent
 
-Randomly extracts a user agent string from the array using [`random.choice()`](https://docs.python.org/3/library/random.html#random.choice):
+[`random.choice()`](https://docs.python.org/3/library/random.html#random.choice)를 사용하여 배열에서 user agent 문자열을 무작위로 추출합니다:
 
 ```python
 random_user_agent = random.choice(user_agents)
 ```
 
-The above line requires the following import:
+위 줄에는 다음 import가 필요합니다:
 
 ```python
 import random
@@ -224,7 +224,7 @@ import random
 
 ### Step 3: Use the Random User Agent
 
-Define the header dictionary with the random user agent and use it in the `requests` request:
+무작위 user agent로 ヘッダー 딕셔너리를 정의하고 `requests` 리クエ스트에서 사용합니다:
 
 ```python
 headers = {
@@ -238,7 +238,7 @@ response = requests.get('https://httpbin.io/user-agent', headers=headers)
 print(response.json())
 ```
 
-These instructions require this import:
+이 지침에는 다음 import가 필요합니다:
 
 ```python
 import requests
@@ -246,7 +246,7 @@ import requests
 
 ### Step 4: Complete Implementation
 
-This is the entire script code:
+다음은 전체 스크립트 코드입니다:
 
 ```python
 import random
@@ -288,10 +288,10 @@ response = requests.get('https://httpbin.io/user-agent', headers=headers)
 print(response.json())
 ```
 
-Run this script multiple times to see different user agents in action.
+이 스크립트를 여러 번 실행하여 서로 다른 user agent가 동작하는 것을 확인해 보십시오.
 
 ## Conclusion
 
-Setting appropriate User-Agent headers is essential for successful web scraping with Python Requests. By customizing and rotating user agents, you can make your automated requests appear more natural and avoid basic anti-bot detection.
+적절한 User-Agent ヘッダー를 설정하는 것은 Python Requests로 성공적인 Webスクレイピング을 수행하는 데 필수적입니다. user agent를 사용자 정의하고 로ーテ이션함으로써, 자동화된 리クエ스트가 더 자연스럽게 보이도록 만들고 기본적인 アンチボット 탐지를 피할 수 있습니다.
 
-However, sophisticated anti-scraping systems may still detect your automation through other means. For more robust scraping, consider using proxy rotation alongside user agent rotation, or explore our dedicated [Web Scraper API](https://brightdata.com/products/web-scraper) that handles these complexities for you.
+하지만 정교한 スクレイピング 방지 시스템은 다른 방법을 통해 자동화를 여전히 감지할 수 있습니다. 보다 견고한 スクレイピング을 위해 user agent 로ーテーション과 함께 プロキシ 로ーテーション을 사용하는 것을 고려하시거나, 이러한 복잡성을 대신 처리해 주는 전용 [Web Scraper API](https://brightdata.co.kr/products/web-scraper)를 살펴보시기 바랍니다.
